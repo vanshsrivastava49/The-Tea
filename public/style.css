@@ -1,4 +1,4 @@
-/* Styling for login page */
+/*login page*/
 .login-container {
     display: flex;
     flex-direction: column;
@@ -7,26 +7,22 @@
     height: 100vh;
     font-family: Arial, sans-serif;
 }
-
 input, button {
     margin: 10px;
     padding: 10px;
     width: 250px;
     font-size: 16px;
 }
-
 button {
-    background-color: #4CAF50;
+    background-color: #ff9900;
     color: white;
     border: none;
     cursor: pointer;
 }
-
 button:hover {
-    background-color: #45a049;
+    background-color: #ffb300;
 }
-
-/* Styling for chat page */
+/*chat page*/
 .chat-container {
     display: flex;
     flex-direction: column;
@@ -35,7 +31,6 @@ button:hover {
     padding: 20px;
     font-family: Arial, sans-serif;
 }
-
 .chat-box {
     border: 1px solid #ccc;
     height: 80vh;
@@ -43,7 +38,6 @@ button:hover {
     padding: 10px;
     background-color: #f9f9f9;
 }
-
 input, button {
     margin: 5px;
     padding: 10px;

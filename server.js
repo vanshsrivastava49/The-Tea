@@ -16,31 +16,22 @@ const SECRET_KEY = 'mysecretkey';
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
-
-// ✅ Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/chatdb')
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Failed to connect:', err));
-
-// ✅ User Schema
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }
 });
-
 const User = mongoose.model('User', userSchema);
-
-// ✅ Chat Schema
 const chatSchema = new mongoose.Schema({
     username: { type: String, required: true },
     message: { type: String, required: true },
     timestamp: { type: Date, default: Date.now }
 });
-
 const Chat = mongoose.model('Chat', chatSchema);
-
-/// ✅ SIGNUP ROUTE
+//signup
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -56,8 +47,7 @@ app.post('/signup', async (req, res) => {
 
     res.status(201).json({ message: 'User registered successfully' });
 });
-
-/// ✅ LOGIN ROUTE
+//login
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -70,23 +60,17 @@ app.post('/login', async (req, res) => {
     if (!isPasswordValid) {
         return res.status(400).json({ message: 'Invalid credentials' });
     }
-
-    // ✅ Generate token and include username
+    //Generate token and include username
     const token = jwt.sign({ id: user._id, username: user.username }, SECRET_KEY, { expiresIn: '12h' });
-
     res.json({ token, username: user.username });  // Send token and username
 });
-
-/// ✅ Middleware for JWT Authentication
+//Middleware for Authentication
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
-    
     if (!authHeader) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-
     const token = authHeader.split(' ')[1];
-
     jwt.verify(token, SECRET_KEY, (err, user) => {
         if (err) {
             return res.status(403).json({ message: 'Forbidden' });
@@ -95,17 +79,14 @@ const authenticateToken = (req, res, next) => {
         next();
     });
 };
-
-// ✅ Verify Token Route
+//verify token route
 app.get('/verify-token', authenticateToken, (req, res) => {
     res.json({ username: req.user.username });
 });
-
-// ✅ Socket.IO handling
+// socket.io handling
 io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
-
-    // Send chat history
+    //chat history
     socket.on('requestChatHistory', async () => {
         try {
             const messages = await Chat.find().sort({ timestamp: 1 });
@@ -114,8 +95,7 @@ io.on('connection', (socket) => {
             console.error('Failed to load chat history:', error);
         }
     });
-
-    // Handle new messages
+    //new messages
     socket.on('chatMessage', async (data) => {
         try {
             const { msg, username, token } = data;
@@ -124,32 +104,26 @@ io.on('connection', (socket) => {
                 console.log('Unauthorized message attempt');
                 return;
             }
-
             jwt.verify(token.split(' ')[1], SECRET_KEY, async (err, user) => {
                 if (err) {
                     console.log('Invalid token:', err);
                     return;
                 }
-
                 const chatMessage = new Chat({
                     username,
                     message: msg
                 });
-
                 await chatMessage.save();
                 io.emit('chatMessage', { username, msg });
-
             });
         } catch (error) {
             console.error('Error sending message:', error);
         }
     });
-
     socket.on('disconnect', () => {
         console.log('User disconnected:', socket.id);
     });
 });
-
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
