@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App</title>
+    <title>UniHub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="header">
-        <h1>Chat App</h1>
+        <h1>UniHub</h1>
         <div class="user-info">
             <span id="usernameDisplay"></span>
             <button onclick="logout()">Logout</button>
@@ -20,51 +20,8 @@
         <input id="msgInput" type="text" placeholder="Type a message..." />
         <button onclick="sendMessage()">Send</button>
     </div>
-
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
-
-    <script>
-        // ✅ Retrieve JWT token from localStorage
-        const token = localStorage.getItem('token');
-        if (!token) {
-            // Redirect to login page if no token
-            window.location.href = "login.html";
-        }
-
-        // ✅ Fetch the user data from the token
-        async function getUserInfo() {
-            try {
-                const response = await fetch('/verify-token', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': token
-                    }
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    document.getElementById('usernameDisplay').innerText = `Welcome, ${data.username}`;
-                } else {
-                    alert('Session expired. Please log in again.');
-                    localStorage.removeItem('token');
-                    window.location.href = "login.html";
-                }
-            } catch (error) {
-                console.error('Error fetching user info:', error);
-                alert('Authentication failed.');
-                localStorage.removeItem('token');
-                window.location.href = "login.html";
-            }
-        }
-
-        getUserInfo();
-
-        // ✅ Logout function
-        function logout() {
-            localStorage.removeItem('token');
-            window.location.href = "login.html";
-        }
-    </script>
+    <script src="./index.js"></script>
 </body>
 </html>
