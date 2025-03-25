@@ -3,40 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniHub</title>
+    <title>The Tea</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body onload="getUserInfo()">  <!-- ✅ Call getUserInfo on load -->
-
-    <!-- ✅ Header Section -->
+<body onload="getUserInfo()">
     <div class="header">
-        <h1>UniHub</h1>
-
+        <h1>The Tea</h1>
         <div class="user-info">
             <div id="welcomeuser">
                 <span id="usernameDisplay">Welcome, Loading...</span>  <!-- Display username -->
             </div>
-
             <div class="logout-container">
-                <button onclick="logout()" class="centerbtn">Logout</button>
+                <button onclick="logout()" class="centerbtn">Login</button>
             </div>
         </div>
     </div>
-
-    <!-- ✅ Chat Section -->
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
         <input id="msgInput" type="text" placeholder="Type a message..." />
         <button onclick="sendMessage()">Send</button>
     </div>
-
-    <!-- ✅ Scripts -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
     <script src="./index.js"></script>
-
 </body>
 </html>

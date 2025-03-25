@@ -26,13 +26,3 @@ async function getUserInfo() {
     }
 }
 getUserInfo();
-const socket = io();
-function logout() {
-    console.log('Logging out.-.--.-');
-    localStorage.removeItem('token');
-    if (socket && socket.connected) {
-        socket.disconnect();
-        console.log('Socket disconnected on logout.');
-    }
-    window.location.href = "login.html";
-}

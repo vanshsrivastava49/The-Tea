@@ -63,3 +63,6 @@ socket.on('disconnect', () => {
     console.warn('Disconnected from server.');
 });
 loadChatHistory();
+function logout(){
+    window.location.href="login.html";
+}

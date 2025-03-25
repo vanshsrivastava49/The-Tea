@@ -12,20 +12,23 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || 3000;
 const SECRET_KEY = 'mysecretkey';
-
-app.use(express.static('public'));
+//middleware
+app.use(express.static('public')); 
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
-mongoose.connect('mongodb://localhost:27017/chatdb')
+//db conn
+mongoose.connect('mongodb://localhost:27017/chatdb') 
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Failed to connect:', err));
-const userSchema = new mongoose.Schema({
+//user schema
+const userSchema = new mongoose.Schema({ 
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }
 });
 const User = mongoose.model('User', userSchema);
-const chatSchema = new mongoose.Schema({
+//chat schema
+const chatSchema = new mongoose.Schema({ 
     username: { type: String, required: true },
     message: { type: String, required: true },
     timestamp: { type: Date, default: Date.now }
