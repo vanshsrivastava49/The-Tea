@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <title>Signup | UniHub</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>Signup</h1>
-    <form id="signupForm">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit">Signup</button>
-    </form>
+<body style="display:flex;justify-content:center; align-items: center;min-height: 100vh;margin: 0;">
+    <div class="container">
+        <h1>The Tea</h1>
+        <div class="form-container">
+        <h2>SignUp</h2>
+        <form id="signupForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+    </div>
     <script src="./signup.js"></script>
 </body>
 </html>

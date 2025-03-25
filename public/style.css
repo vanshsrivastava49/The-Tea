@@ -39,6 +39,9 @@ h1{
     font-weight:700;
     font-style: normal;
     font-size:50px;
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:500;
 }
 #welcomeuser{
     text-align: center;   
@@ -85,6 +88,37 @@ button:hover{
 }
 .logout-container {
     display: flex;
-    justify-content: center;        /* Center horizontally */
-    margin: 10px 0;                 /* Add spacing */
+    justify-content: center;       
+    margin: 10px 0;                 
+}
+h2{
+    text-align: center;
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+    font-size:40px;
+}
+.form-container {
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+#newuser{
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:400;
+    font-style: normal;
 }
