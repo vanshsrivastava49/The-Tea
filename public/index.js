@@ -1,48 +1,38 @@
 const token = localStorage.getItem('token');
-        if (!token) {
-            // Redirect to login page if no token
-            window.location.href = "login.html";
-        }
-
-        // ✅ Fetch the user data from the token
-        async function getUserInfo() {
-            try {
-                const response = await fetch('/verify-token', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': token
-                    }
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    document.getElementById('usernameDisplay').innerText = `Welcome, ${data.username}`;
-                } else {
-                    alert('Session expired. Please log in again.');
-                    localStorage.removeItem('token');
-                    window.location.href = "login.html";
-                }
-            } catch (error) {
-                console.error('Error fetching user info:', error);
-                alert('Authentication failed.');
-                localStorage.removeItem('token');
-                window.location.href = "login.html";
+if (!token) {
+    window.location.href = "login.html";
+}
+async function getUserInfo() {
+    try {
+        const response = await fetch('/verify-token', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-        }
-
-        getUserInfo();
-
-        // ✅ Logout function
-        function logout() {
-            // Remove token from localStorage
+        });
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById('usernameDisplay').innerText = `Welcome, ${data.username}`;
+        } else {
+            alert('Session expired. Please log in again.');
             localStorage.removeItem('token');
-        
-            // Disconnect the socket
-            if (socket && socket.connected) {
-                socket.disconnect();
-                console.log('Socket disconnected on logout.');
-            }
-        
-            // Redirect to login page
             window.location.href = "login.html";
         }
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+        alert('Authentication failed.');
+        localStorage.removeItem('token');
+        window.location.href = "login.html";
+    }
+}
+getUserInfo();
+const socket = io();
+function logout() {
+    console.log('Logging out.-.--.-');
+    localStorage.removeItem('token');
+    if (socket && socket.connected) {
+        socket.disconnect();
+        console.log('Socket disconnected on logout.');
+    }
+    window.location.href = "login.html";
+}

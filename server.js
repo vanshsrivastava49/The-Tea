@@ -60,11 +60,9 @@ app.post('/login', async (req, res) => {
     if (!isPasswordValid) {
         return res.status(400).json({ message: 'Invalid credentials' });
     }
-    //Generate token and include username
     const token = jwt.sign({ id: user._id, username: user.username }, SECRET_KEY, { expiresIn: '12h' });
-    res.json({ token, username: user.username });  // Send token and username
+    res.json({ token, username: user.username });
 });
-//Middleware for Authentication
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     if (!authHeader) {

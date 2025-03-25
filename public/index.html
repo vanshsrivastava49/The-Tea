@@ -9,22 +9,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
+<body onload="getUserInfo()">  <!-- ✅ Call getUserInfo on load -->
+
+    <!-- ✅ Header Section -->
     <div class="header">
         <h1>UniHub</h1>
+
         <div class="user-info">
             <div id="welcomeuser">
-                <span id="usernameDisplay"></span>
+                <span id="usernameDisplay">Welcome, Loading...</span>  <!-- Display username -->
             </div>
-            <button onclick="logout()" class="centerbtn">Logout</button>
+
+            <div class="logout-container">
+                <button onclick="logout()" class="centerbtn">Logout</button>
+            </div>
         </div>
     </div>
+
+    <!-- ✅ Chat Section -->
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
         <input id="msgInput" type="text" placeholder="Type a message..." />
         <button onclick="sendMessage()">Send</button>
     </div>
+
+    <!-- ✅ Scripts -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
     <script src="./index.js"></script>
+
 </body>
 </html>
