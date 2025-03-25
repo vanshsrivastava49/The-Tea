@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniHub</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
     <div class="header">
         <h1>UniHub</h1>
         <div class="user-info">
-            <span id="usernameDisplay"></span>
-            <button onclick="logout()">Logout</button>
+            <div id="welcomeuser">
+                <span id="usernameDisplay"></span>
+            </div>
+            <button onclick="logout()" class="centerbtn">Logout</button>
         </div>
     </div>
-
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
         <input id="msgInput" type="text" placeholder="Type a message..." />

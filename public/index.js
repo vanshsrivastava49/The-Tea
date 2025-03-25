@@ -34,6 +34,15 @@ const token = localStorage.getItem('token');
 
         // ✅ Logout function
         function logout() {
+            // Remove token from localStorage
             localStorage.removeItem('token');
+        
+            // Disconnect the socket
+            if (socket && socket.connected) {
+                socket.disconnect();
+                console.log('Socket disconnected on logout.');
+            }
+        
+            // Redirect to login page
             window.location.href = "login.html";
         }
