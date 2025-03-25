@@ -1,4 +1,3 @@
-/*login page*/
 .login-container {
     display: flex;
     flex-direction: column;
@@ -31,7 +30,6 @@ button {
 button:hover {
     background-color: #ffb300;
 }
-/*chat page*/
 h1{
     text-align: center;
     font-family: "Outfit", sans-serif;
